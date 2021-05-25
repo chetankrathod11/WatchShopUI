@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {StyleSheet, Text, View, FlatList, Image} from 'react-native';
+import {Text, View, FlatList, Image} from 'react-native';
 
 const DATA = [
   {
@@ -64,24 +64,28 @@ const DATA = [
   },
 ];
 
+const renderItem = ({item}) => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: hp('1%'),
+      }}>
+      {item.image}
+      <Text style={{fontSize: hp('3%')}}>{item.title}</Text>
+      <Text style={{fontSize: hp('2%')}}>{item.price}</Text>
+    </View>
+  );
+};
+
 const List = () => {
   return (
     <FlatList
       data={DATA}
       numColumns={2}
-      renderItem={({item}) => (
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: hp('1%'),
-          }}>
-          {item.image}
-          <Text style={{fontSize: hp('3%')}}>{item.title}</Text>
-          <Text style={{fontSize: hp('2%')}}>{item.price}</Text>
-        </View>
-      )}
+      renderItem={({item}) => renderItem({item})}
     />
   );
 };
